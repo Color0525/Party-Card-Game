@@ -88,7 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6db0f3eb167fb4ca134ca2b8672971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fieldTagName: FieldTag
+  m_fieldTagName: Field
+  m_handTagName: Hand
   m_dummyPlefab: {fileID: 6044883329380461559, guid: 64ed16abc08c9f84a9fe20a9ada424ad,
     type: 3}
 --- !u!114 &-2749660777378334604
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_name: "\u30B9\u30E9\u30A4\u30E0"
   m_text: "\u30BF\u30FC\u30F3\u958B\u59CB\u6642\u306B\u5168\u3066\u306E\u6575\u30E6\u30CB\u30C3\u30C8\u306B2\u30C0\u30E1\u30FC\u30B8\u3002"
   m_initialPower: 3
-  m_power: 3
+  m_currentPower: 3
   m_effects:
   - m_condition: 0
     m_target: 0

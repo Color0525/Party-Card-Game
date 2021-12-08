@@ -5,29 +5,62 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     static GameManager m_instance;
-    static public GameManager Instance => m_instance; 
+    static public GameManager Instance => m_instance;
+    private void Awake() => m_instance = this;
 
-    [SerializeField] List<CardInfo> m_playerFieldcards = new List<CardInfo>();
-    //List<CardInfo> m_enemyFieldcards = new List<CardInfo>();
-    [SerializeField] int m_totalPower = 0;
 
-    private void Awake()
+    //public enum Phase
+    //{
+    //    BeforeBattle,
+    //    BeginTurn,
+    //    InTurn,
+    //    EndTurn,
+    //    AfterBattle,
+    //}
+
+    //[SerializeField] Phase m_state = Phase.BeginTurn;
+    int m_currentNum = 0;
+
+    //public Phase State { get { return m_state; } set { m_state = value; } }
+
+
+    [SerializeField] List<CardData> m_deck = new List<CardData>();
+    //public List<CardData> Deck => m_deck;
+
+    PlayerManager m_playerM = default;
+
+    private void Start()
     {
-        m_instance = this;
+        m_playerM = GetComponent<PlayerManager>();
+
+        BeginCurrentPlayer();
     }
 
-    public void Play(CardInfo card)
+
+    void BeginCurrentPlayer()
     {
-        m_playerFieldcards.Add(card);
-        UpdateTotalPower();
+        m_playerM.AllPlayers[m_currentNum].BeginTurn();
+        Debug.Log($"P{m_currentNum}");
     }
+    public void EndPlayer()
+    {
+        BeginNextPlayer();
+    }
+    void BeginNextPlayer()
+    {
+        m_currentNum++;
+        if (m_playerM.AllPlayers.Count <= m_currentNum) m_currentNum = 0;
+
+        BeginCurrentPlayer();
+    }
+
+   
 
     public void UpdateTotalPower()
     {
-        int total = 0;
-        m_playerFieldcards.ForEach(x => total += x.m_power);
-        m_totalPower = total;
-        Debug.Log(m_totalPower);
+        //m_totalPower = 0;
+        //m_playerFieldcards.ForEach(x => m_totalPower += x.CurrentPower);
+        //Debug.Log(m_totalPower);
         //return _totalPower;
     } 
 }
